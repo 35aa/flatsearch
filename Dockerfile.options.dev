@@ -1,0 +1,7 @@
+FROM golang
+ENV CGO_ENABLED 0
+RUN mkdir -p /go/src/github.com/35aa/flatsearch
+ADD . /go/src/github.com/35aa/flatsearch
+WORKDIR /go/src/github.com/35aa/flatsearch/cmd/options
+RUN go get github.com/codegangsta/gin
+CMD gin

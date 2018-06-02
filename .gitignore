@@ -14,3 +14,4 @@
 .idea
 vendor
 .vscode
+cmd/options/gin-bin

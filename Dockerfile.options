@@ -1,0 +1,13 @@
+# Stage 0
+FROM golang
+ENV CGO_ENABLED 0
+RUN mkdir -p /go/src/github.com/35aa/flatsearch
+ADD . /go/src/github.com/35aa/flatsearch
+WORKDIR /go/src/github.com/35aa/flatsearch/cmd/options
+RUN go build -ldflags "-X main.build=$(git rev-parse HEAD)"
+
+# Stage 1
+FROM alpine:3.7
+EXPOSE 3000
+COPY --from=0 /go/src/github.com/35aa/flatsearch/cmd/options/options /bin/
+ENTRYPOINT ["/bin/options"]
